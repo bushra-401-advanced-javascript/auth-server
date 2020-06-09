@@ -11,6 +11,7 @@ async function signupHandler (req,res){
   try{
     const user = await users.save(req.body);
     const token = users.generateToken(user);
+    res.cookie('token', req.token, {httpOnly: false});
     res.status(200).json({token});
   }
   catch(err){
@@ -18,6 +19,7 @@ async function signupHandler (req,res){
   }
 }
 function signinHandler(req,res){
+  res.cookie('token', req.token, {httpOnly: false});
   res.status(200).json({token:req.token, user:req.user});
 }
 async function listHandler(req,res){

@@ -14,6 +14,14 @@ const notFound = require('./middleware/404');
 const serverError = require('./middleware/500');
 app.use('*', notFound); 
 app.use(serverError); 
+const oauth = require('../src/auth/middleware/oauth');
+
+app.get('/oauth', oauth, (req, res) => {
+    res.cookie('token', req.token, {httpOnly: false});
+    res.status(200).send(req.token);
+});
+
+
 
 module.exports = {
     server: app,
