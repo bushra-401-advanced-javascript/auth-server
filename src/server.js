@@ -17,23 +17,23 @@ app.use(serverError);
 const oauth = require('../src/auth/middleware/oauth');
 
 app.get('/oauth', oauth, (req, res) => {
-    res.cookie('token', req.token, {httpOnly: false});
-    res.status(200).send(req.token);
+  res.cookie('token', req.token, {httpOnly: false});
+  res.status(200).send(req.token);
 });
 
 
 
 module.exports = {
-    server: app,
-    start: (port, mongodb_uri) => {
-        app.listen(port, () => {
-            console.log('Server is up and running on port', port);
-        });
-        let options = {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useCreateIndex: true,
-        };
-        mongoose.connect(mongodb_uri, options);
-    },
+  server: app,
+  start: (port, mongodb_uri) => {
+    app.listen(port, () => {
+      console.log('Server is up and running on port', port);
+    });
+    let options = {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    };
+    mongoose.connect(mongodb_uri, options);
+  },
 };
