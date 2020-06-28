@@ -4,9 +4,10 @@
 
 const express = require('express');
 const router = express.Router();
-const bearerMiddleware = require('./middleware/bearer');
+const bearerAuth = require('./middleware/bearer');
+const permissions = require('./middleware/authorize');
 
-router.get('/secret', bearerMiddleware, (req,res) => {} );
+router.get('/secret', bearerAuth, (req,res) => res.json(req.user) );
 
 router.post('/add', bearerAuth, permissions('create'), (req,res)=>{
   res.status(201).send('created ..');

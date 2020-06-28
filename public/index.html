@@ -7,7 +7,7 @@
 </head>
 <body>
     <main>
-        <a href="#" id="oauth">Login</a>
+        <a href="#" id="oauth">Login With GH</a>
     </main>
     <script>
         let URL = "https://github.com/login/oauth/authorize";
@@ -21,7 +21,7 @@
         //encodeURIComponent
         //create a dynamic q-string
         let QueryString = Object.keys(options).map((key) => {
-            return `${key} = `, + encodeURIComponent(options[key]);
+            return `${key}=` + encodeURIComponent(options[key]);
         }).join('&');
         let authURL = `${URL}?${QueryString}`;
         let link = document.getElementById('oauth');

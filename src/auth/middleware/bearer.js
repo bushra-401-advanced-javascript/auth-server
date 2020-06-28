@@ -5,6 +5,7 @@ const users = require('../models/users/users-model');
 module.exports = (req, res, next) => {
   if (!req.headers.authorization) {
     next('Invalid Login, No Auth Headers');
+    return;
   }
   else {
     const [auth, token] = req.headers.authorization.split(' ');
